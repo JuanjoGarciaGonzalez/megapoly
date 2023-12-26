@@ -1,7 +1,7 @@
 public class Square {
     protected Player owner;
     protected int position;
-    protected Player[] visitors;
+    public Player[] visitors;
 
     public Square(int position) {
         this.position = position;
@@ -38,5 +38,17 @@ public class Square {
                 ", visitors=" + visitors +
                 ", Position=" + position +
                 '}';
+    }
+
+    public void addVisitor(Player player) {
+        if(visitors.length == 0) {
+            this.visitors = new Player[2];
+        }
+
+        if (this.visitors[0] == null) {
+            this.visitors[0] = player;
+        }else {
+            this.visitors[1] = player;
+        }
     }
 }

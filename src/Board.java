@@ -22,13 +22,30 @@ public class Board {
         for (Square square : squares) {
             Player[] visitors = square.getVisitors();
             if (visitors != null && visitors.length != 0) {
-                String[] visitorsFormatted = new String[2];
-                for(int i = 0; i < visitors.length; i++) {
-                    visitorsFormatted[i] = visitors[i].getName().substring(0, 1);
+                if(square.getPosition() == 0) {
+                    boardString += " SALIDA ";
+                }else {
+                    String[] visitorsFormatted = new String[2];
+                    for(int i = 0; i < visitors.length; i++) {
+                        if (visitors[i] != null) {
+                            visitorsFormatted[i] = visitors[i].getName().substring(0, 1);
+                        }
+
+                    }
+
+                    if(visitorsFormatted[0] == null && visitorsFormatted[1] == null) {
+                        boardString += " _ ";
+                    }else {
+                        for (String visitorInitial : visitorsFormatted) {
+                            if (visitorInitial != null) {
+                                boardString += visitorInitial;
+                            }
+
+                        }
+                    }
                 }
-                for (String visitorInitial : visitorsFormatted) {
-                    boardString += visitorInitial;
-                }
+
+
             }else {
                 boardString += " _ ";
             }
@@ -42,5 +59,13 @@ public class Board {
         return "Board{" +
                 "Squares=" + Arrays.toString(squares) +
                 '}';
+    }
+
+    public int calculatePosition(int current, int resultDice) {
+        if(current + resultDice > 17) {
+            return (current + resultDice) - 16;
+        }else {
+            return (current + resultDice);
+        }
     }
 }
