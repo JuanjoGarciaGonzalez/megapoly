@@ -86,4 +86,8 @@ public class Board {
             return (current + resultDice);
         }
     }
+
+    public void passingExitSquare(Player player) {
+        player.setMoney(player.getMoney() + 20);
+    }
 }
