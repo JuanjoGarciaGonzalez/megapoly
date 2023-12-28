@@ -4,10 +4,9 @@ public class Game {
     public Player playerOne;
     public Player playerTwo;
     public Board board;
-    public Scanner scanner;
+    public Scanner scanner = new Scanner(System.in);
 
     public void play() throws InterruptedException {
-        scanner = new Scanner(System.in);
         //INICIALIZAR LOS JUGADORES
         initPlayers();
 
