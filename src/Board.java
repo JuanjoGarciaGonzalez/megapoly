@@ -79,6 +79,24 @@ public class Board {
                 '}';
     }
 
+    public void addVisitorToSquare(Player player, int diceResult) {
+        int newPosition = this.calculatePosition(player.getPosition(), diceResult);
+        System.out.println("Result: " + diceResult);
+        this.squares[newPosition].addVisitor(player);
+        player.setPosition(newPosition);
+    }
+
+    public void deleteVisitorFromSquare(Player player) {
+        Player[] previousVisitors = this.squares[player.getPosition()].getVisitors();
+        for (int i = 0; i < previousVisitors.length; i++) {
+            if(previousVisitors[i] != null) {
+                if (previousVisitors[i].getId() == player.getId()) {
+                    this.squares[player.getPosition()].visitors[i] = null;
+                }
+            }
+        }
+    }
+
     public int calculatePosition(int current, int resultDice) {
         if(current + resultDice >= 17) {
             return (current + resultDice) - 16;
