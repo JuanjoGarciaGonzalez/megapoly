@@ -61,7 +61,7 @@ public class Board {
         boardString += "\n";
         for(Square square : squares) {
             if(square.getPosition() == 0) {
-                boardString += " |   "+square.getPosition()+"  | ";
+                boardString += " |  0"+square.getPosition()+"  | ";
             }else if(square.getPosition() < 10){
                 boardString += " |0"+square.getPosition()+"| ";
             }else {

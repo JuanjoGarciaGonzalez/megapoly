@@ -7,13 +7,13 @@ public class Game {
     public Scanner scanner = new Scanner(System.in);
 
     public void play() throws InterruptedException {
-        //INICIALIZAR LOS JUGADORES
+        // INIT THE PLAYERS
         initPlayers();
 
         //GENERATE BOARD
         generateBoard();
 
-        //ROLL THE DICE PER TURNS UNTIL PLAY IS TRUE
+        //ROLL THE DICE PER TURNS UNTIL PLAY IS FALSE
         startGame();
     }
 
@@ -36,6 +36,7 @@ public class Game {
 
     public void startGame() throws InterruptedException {
         boolean play = true;
+        int rounds = 0;
         while(play) {
             System.out.println("Turn " + playerOne.getName() + ", press ENTER to roll the dice");
             scanner.nextLine();
@@ -63,6 +64,12 @@ public class Game {
 
             //SHOW BOARD STATUS AT END OF A ROUND
             System.out.println(board.showBoardInTerminal());
+
+            //PLAY 5 ROUNDS
+            rounds++;
+            if(rounds == 5) {
+                play = false;
+            }
         }
     }
 }
