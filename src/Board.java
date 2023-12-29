@@ -1,7 +1,7 @@
 import java.util.Arrays;
 
 public class Board {
-    Square[] squares = new Square[17];
+    Square[] squares = new Square[20];
     protected int exitMoney;
 
     public Board() {
@@ -24,35 +24,32 @@ public class Board {
         for (Square square : squares) {
             Player[] visitors = square.getVisitors();
             if (visitors != null && visitors.length != 0) {
-                if(square.getPosition() == 0) {
-                    boardString += " |SALIDA| ";
-                }else {
-                    String[] visitorsFormatted = new String[2];
-                    for(int i = 0; i < visitors.length; i++) {
-                        if (visitors[i] != null) {
-                            visitorsFormatted[i] = visitors[i].getName().substring(0, 1);
-                        }
-
+                String[] visitorsFormatted = new String[2];
+                for(int i = 0; i < visitors.length; i++) {
+                    if (visitors[i] != null) {
+                        visitorsFormatted[i] = visitors[i].getName().substring(0, 1);
                     }
 
-
-                    if(visitorsFormatted[0] == null && visitorsFormatted[1] == null) {
-                        boardString += " |__| ";
-                    }else {
-                        boardString += " |";
-                        for (String visitorInitial : visitorsFormatted) {
-                            if (visitorInitial != null) {
-                                boardString += visitorInitial;
-                            }
-
-
-                        }
-                        if(visitorsFormatted[1]==null) {
-                            boardString += "_";
-                        }
-                        boardString += "| ";
-                    }
                 }
+
+
+                if(visitorsFormatted[0] == null && visitorsFormatted[1] == null) {
+                    boardString += " |__| ";
+                }else {
+                    boardString += " |";
+                    for (String visitorInitial : visitorsFormatted) {
+                        if (visitorInitial != null) {
+                            boardString += visitorInitial;
+                        }
+
+
+                    }
+                    if(visitorsFormatted[1]==null) {
+                        boardString += "_";
+                    }
+                    boardString += "| ";
+                }
+
 
 
             }else {
@@ -62,9 +59,7 @@ public class Board {
         }
         boardString += "\n";
         for(Square square : squares) {
-            if(square.getPosition() == 0) {
-                boardString += " |  0"+square.getPosition()+"  | ";
-            }else if(square.getPosition() < 10){
+            if(square.getPosition() < 10){
                 boardString += " |0"+square.getPosition()+"| ";
             }else {
                 boardString += " |"+square.getPosition()+"| ";
@@ -100,8 +95,8 @@ public class Board {
     }
 
     public int calculatePosition(int current, int resultDice) {
-        if(current + resultDice >= 17) {
-            return (current + resultDice) - 16;
+        if(current + resultDice >= 20) {
+            return (current + resultDice) - 20;
         }else {
             return (current + resultDice);
         }
