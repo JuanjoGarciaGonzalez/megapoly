@@ -2,11 +2,13 @@ import java.util.Arrays;
 
 public class Board {
     Square[] squares = new Square[17];
+    protected int exitMoney;
 
     public Board() {
         for (int i = 0; i < squares.length; i++) {
             squares[i] = new Square(i);
         }
+        this.exitMoney = 20;
     }
 
     public Square[] getSquares() {
@@ -106,6 +108,6 @@ public class Board {
     }
 
     public void passingExitSquare(Player player) {
-        player.setMoney(player.getMoney() + 20);
+        player.setMoney(player.getMoney() + this.exitMoney);
     }
 }
