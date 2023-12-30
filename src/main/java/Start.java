@@ -8,7 +8,7 @@ public class Start extends Square {
         return goMoney;
     }
 
-    public void passingExitSquare(Player player) {
+    public void passingStartSquare(Player player) {
         player.setMoney(player.getMoney() + this.goMoney);
     }
 }

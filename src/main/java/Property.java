@@ -16,11 +16,11 @@ public class Property extends Square {
     }
 
     public boolean haveToPay(Player player) {
-        if(this.owner.getId() == player.getId()) {
+        if(this.owner != null && this.owner.getId() != player.getId()) {
             player.setMoney(player.getMoney() - this.rent);
-            return false;
-        }else {
             return true;
+        }else {
+            return false;
         }
     }
 }
