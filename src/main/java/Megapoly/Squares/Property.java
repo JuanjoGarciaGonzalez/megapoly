@@ -1,3 +1,6 @@
+package Megapoly.Squares;
+import Megapoly.*;
+
 public class Property extends Square {
 
     protected int rent;

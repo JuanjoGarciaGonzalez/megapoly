@@ -1,3 +1,6 @@
+package Megapoly.Squares;
+import Megapoly.*;
+
 public class Start extends Square {
     protected int goMoney = 20;
     public Start(int position) {

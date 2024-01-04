@@ -1,3 +1,6 @@
+package Megapoly.Squares;
+import Megapoly.*;
+
 public class Square {
     protected int position;
     public Player[] visitors;

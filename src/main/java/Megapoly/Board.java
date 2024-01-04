@@ -1,4 +1,7 @@
+package Megapoly;
+
 import java.util.Arrays;
+import Megapoly.Squares.*;
 
 public class Board {
     Square[] squares = new Square[20];
@@ -8,6 +11,18 @@ public class Board {
             switch (i) {
                 case 0:
                     squares[i] = new Start(i);
+                    break;
+                case 3, 9, 17:
+                    squares[i] = new Bank(i);
+                    break;
+                case 5, 15:
+                    squares[i] = new Prison(i);
+                    break;
+                case 7, 14, 18:
+                    squares[i] = new Lucky(i);
+                    break;
+                case 10:
+                    squares[i] = new Parking(i);
                     break;
                 default:
                     squares[i] = new Property(i);

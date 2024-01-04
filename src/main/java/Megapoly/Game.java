@@ -1,3 +1,5 @@
+package Megapoly;
+
 import java.util.Scanner;
 
 public class Game {
