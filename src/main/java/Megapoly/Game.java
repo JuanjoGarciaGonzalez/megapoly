@@ -33,6 +33,7 @@ public class Game {
         board = new Board();
         Player[] players = {playerOne, playerTwo};
         board.squares[0].setVisitors(players);
+        System.out.println(board.showBoardSquares());
         System.out.println(board.showBoardInTerminal());
     }
 

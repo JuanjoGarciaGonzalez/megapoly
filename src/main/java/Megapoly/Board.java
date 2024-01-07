@@ -5,6 +5,29 @@ import Megapoly.Squares.*;
 
 public class Board {
     Square[] squares = new Square[20];
+    String[] squaresNames = {
+            "GO",
+            "Mediterranean Avenue",
+            "Baltic Avenue",
+            "BANK",
+            "Reading Railroad",
+            "VISIT PRISON",
+            "Oriental Avenue",
+            "LUCKY",
+            "Vermont Avenue",
+            "BANK",
+            "PARKING",
+            "Connecticut Avenue",
+            "St. Charles Place",
+            "Electric Company",
+            "LUCKY",
+            "PRISON",
+            "States Avenue",
+            "BANK",
+            "LUCKY",
+            "Virginia Avenue"
+    };
+
 
     public Board() {
         for (int i = 0; i < squares.length; i++) {
@@ -24,11 +47,25 @@ public class Board {
                 case 10:
                     squares[i] = new Parking(i);
                     break;
+                case 1, 2, 4:
+                    squares[i] = new Property(i, "BROWN");
+                    break;
+                case 6, 8:
+                    squares[i] = new Property(i, "ORANGE");
+                    break;
+                case 11, 12, 13:
+                    squares[i] = new Property(i, "YELLOW");
+                    break;
+                case 16, 19:
+                    squares[i] = new Property(i, "BLUE");
+                    break;
                 default:
-                    squares[i] = new Property(i);
                     break;
             }
+
+            squares[i].setName(squaresNames[i]);
         }
+
     }
 
     public Square[] getSquares() {
@@ -40,7 +77,7 @@ public class Board {
     }
 
     public String showBoardInTerminal() {
-        String boardString = "Board:\n";
+        String boardString = "\nBOARD GAME:\n";
         for (Square square : squares) {
             Player[] visitors = square.getVisitors();
             if (visitors != null && visitors.length != 0) {
@@ -86,6 +123,22 @@ public class Board {
             }
 
         }
+
+        return boardString;
+    }
+
+    public String showBoardSquares() {
+        String boardString = "\nBOARD SQUARES:\n";
+        for(Square square : squares) {
+            String colorProperty = "";
+            if (square instanceof Property) {
+                colorProperty = "|" + ((Property) square).getColor();
+            }
+            boardString += square.getPosition()+":" + square.getName() + colorProperty + "\n";
+
+
+        }
+
         return boardString;
     }
 

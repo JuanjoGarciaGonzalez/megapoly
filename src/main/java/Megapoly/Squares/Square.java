@@ -4,6 +4,7 @@ import Megapoly.*;
 public class Square {
     protected int position;
     public Player[] visitors;
+    protected String name;
 
     public Square(int position) {
         this.position = position;
@@ -23,6 +24,14 @@ public class Square {
 
     public void setVisitors(Player[] visitors) {
         this.visitors = visitors;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
