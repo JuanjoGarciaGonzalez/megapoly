@@ -19,7 +19,8 @@ public class Square {
         return visitors;
     }
 
-    public void setPosition(int position) {position = position;
+    public void setPosition(int position) {
+        this.position = position;
     }
 
     public void setVisitors(Player[] visitors) {
