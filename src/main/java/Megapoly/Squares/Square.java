@@ -55,5 +55,7 @@ public class Square {
         }
     }
 
+    public void squareAction(Player player, int position) {
 
+    }
 }

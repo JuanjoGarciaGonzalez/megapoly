@@ -41,8 +41,14 @@ public class Board {
                 case 5, 15:
                     squares[i] = new Prison(i);
                     break;
-                case 7, 14, 18:
-                    squares[i] = new Lucky(i);
+                case 7:
+                    squares[i] = new Lucky(i, "You receive 15Mm for the profits of your investments\n", 15);
+                    break;
+                case 14:
+                    squares[i] = new Lucky(i, "The Treasury demands 30Mm from you for irregularities\n", -30);
+                    break;
+                case 18:
+                    squares[i] = new Lucky(i, "You win 50Mm in the local lottery\n", 50);
                     break;
                 case 10:
                     squares[i] = new Parking(i);
@@ -152,8 +158,11 @@ public class Board {
     public void addVisitorToSquare(Player player, int diceResult) {
         int newPosition = this.calculatePosition(player.getPosition(), diceResult);
         System.out.println("Result: " + diceResult);
+        int oldPosition = player.getPosition();
         this.squares[newPosition].addVisitor(player);
         player.setPosition(newPosition);
+
+        this.playerAction(player, newPosition, oldPosition);
     }
 
     public void deleteVisitorFromSquare(Player player) {
@@ -172,6 +181,43 @@ public class Board {
             return (current + resultDice) - 20;
         }else {
             return (current + resultDice);
+        }
+    }
+
+    public void playerAction(Player player, int position, int oldPosition) {
+        if(position < oldPosition) {
+            System.out.println("You pass the start square, you get 100Mm");
+            player.setMoney(player.getMoney() + 100);
+        }else if(position == 5 || position == 15) {
+            System.out.println("You are in the prision square, you lose your turn for 3 rolls, unless you roll a 5 on the die");
+            player.setInPrision(true);
+        }else if(position == 10) {
+            System.out.println("You are in the parking, rest your shift");
+        }else if(position == 3 || position == 9 || position == 17) {
+            System.out.println("You have to pay a bank tax, 30Mm will be subtracted");
+            player.setMoney(player.getMoney() - 30);
+        }else if(position == 7 || position == 14 || position == 18) {
+            System.out.println("You are in a lucky square, your card is:");
+            System.out.println(((Lucky) this.squares[position]).getMessage());
+            player.setMoney(player.getMoney() + ((Lucky) this.squares[position]).getOperation());
+        }else {
+            if (((Property) this.squares[position]).getOwner() == null) {
+                System.out.printf("You are in a property square (%s), you can buy it for %s", this.squares[position].getName(), ((Property) this.squares[position]).getPrice());
+                System.out.println("Do you want to buy it? (Y/N)");
+                String answer = Game.scanner.nextLine();
+                if (answer.equals("Y") || answer.equals("y")) {
+                    ((Property) this.squares[position]).ownSquare(player);
+                    System.out.printf("You bought the property %s for %s\n", this.squares[position].getName(), ((Property) this.squares[position]).getPrice());
+                }else {
+                    System.out.println("You didn't buy the property");
+                }
+            } else {
+                System.out.printf("You are in a property square, you have to pay the rent of %s for %s\n",((Property) this.squares[position]).getRent(), this.squares[position].getName());
+                player.setMoney(player.getMoney() - ((Property) this.squares[position]).getRent());
+
+                Player playerOwner = ((Property) this.squares[position]).getOwner();
+                playerOwner.setMoney(playerOwner.getMoney() + ((Property) this.squares[position]).getRent());
+            }
         }
     }
 }

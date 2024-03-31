@@ -11,8 +11,8 @@ public class Property extends Square {
 
     public Property(int position, String color) {
         super(position);
-        this.rent = 20;
-        this.price = 50;
+        this.rent = 15;
+        this.price = 30;
         this.color = color;
     }
 
